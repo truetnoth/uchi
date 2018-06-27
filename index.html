@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        span {
+            display: inline-block;
+            height: 31px;
+            padding: 5px;
+            border-radius: 5px;
+        }
         input {
             display: block;
             width: 10px;
@@ -18,32 +24,41 @@
            width: 900px;
            height: 350px;
            margin: 150px auto;
-           background: url(./assets/sprite.png) no-repeat bottom;
+           background: url(sprite.png) no-repeat bottom;
        }
             .solving {
                 font-size: 36px;
-                width: 150px;
+                width: 200px;
                 margin: 20px auto;
             }
         .arrow_augend {
             width: 233px;
             height: 90px;
-            background-image: url(./assets/arrow.png);
+            background-image: url(arrow.png);
             background-repeat: no-repeat;
             background-position: bottom;
         }
         .arrow_addend {
-            height: 48px;
+            height: 90px;
             width: 312px;
-            background-image: url(./assets/arrow-2.png);
+            background-image: url(arrow-2.png);
             background-repeat: no-repeat;
             background-position: bottom;
+        }
+        .arrow_addend span, .arrow_augend span {
+            display: block;
+            width: 10px;
+            margin: 4px auto;
+            font-size: 19px;
         }
         .number_line {
             display: flex;
             width: 89%;
             height: 50px;
-            margin: 160px auto;
+            margin: 155px auto;
+        }
+        .solving .solving-input {
+            display: inline-block;
         }
     </style>
 </head>
@@ -60,9 +75,8 @@
         </div>
         <div class="number_line">
             <div class="arrow_augend">
-                <input type="text" maxlength="1" style= "font-size: 18px;">
+                <input class="augendInput" type="text" maxlength="1" style= "font-size: 18px;">
             </div>
-            <!-- <div class="arrow_addend"></div> -->
         </div>
     </section>
     <script src="main.js" defer="true"></script>
