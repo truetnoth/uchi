@@ -1,3 +1,5 @@
+'use strict';
+
 window.onload = function() {
     userInput.value = ''; // чистим ввод при перезагрузке страницы
     console.log('👱🏼 Трусевич Валерий')
@@ -18,7 +20,7 @@ let solvingInput = document.createElement('input');
 let solving = document.querySelector('.solving');
 
 document.querySelector('input').onkeypress = function(e) {
-    if (e.charCode === 0) {
+    if (e.charCode === 0 || e.charCode === 13) {
         let firstNum = this.value;
         if (firstNum !== augend) {
             this.style.color = 'red';
@@ -33,7 +35,7 @@ document.querySelector('input').onkeypress = function(e) {
             document.getElementById('augend').style.backgroundColor = '';
 
             document.querySelector('.augendInput').onkeypress = function(e) {
-                if (e.charCode === 0) {
+                if (e.charCode === 0 || e.charCode === 13) {
                     let secondNum = this.value;
                     if (secondNum !== addend) {
                         this.style.color = 'red';
@@ -48,7 +50,7 @@ document.querySelector('input').onkeypress = function(e) {
                         document.getElementById('addend').style.backgroundColor = '';
 
                         document.querySelector('.solving_input').onkeypress = function(e) {
-                            if (e.charCode === 0) {
+                            if (e.charCode === 0 || e.charCode === 13) {
                                 let result = this.value;
                                 if (result !== summaryNum) {
                                     this.style.color = 'red';
