@@ -1,1 +1,94 @@
-<h1>Hello</h2>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input {
+            display: block;
+            width: 10px;
+            margin: 0 auto;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            padding: 4px;
+        }
+       .task {
+           font-family: sans-serif;
+           width: 900px;
+           height: 350px;
+           margin: 150px auto;
+           background: url(sprite.png) no-repeat bottom;
+       }
+            .solving {
+                font-size: 36px;
+                width: 150px;
+                margin: 20px auto;
+            }
+        .arrow_augend {
+            width: 233px;
+            height: 90px;
+            background-image: url(arrow.png);
+            background-repeat: no-repeat;
+            background-position: bottom;
+        }
+        .arrow_addend {
+            height: 48px;
+            width: 312px;
+            background-image: url(arrow-2.png);
+            background-repeat: no-repeat;
+            background-position: bottom;
+        }
+        .number_line {
+            display: flex;
+            width: 89%;
+            height: 50px;
+            margin: 160px auto;
+        }
+    </style>
+</head>
+<body>
+    <section class="task">
+        <div class="solving">
+            <span id="augend">6</span>
+            <span>+</span>
+            <span id="addend">8</span>
+            <span>=</span>
+            <span id="summary">?</span>
+        </div>
+        <div class="main">
+        </div>
+        <div class="number_line">
+            <div class="arrow_augend">
+                <input type="text" maxlength="1" style= "font-size: 18px;">
+            </div>
+            <!-- <div class="arrow_addend"></div> -->
+        </div>
+    </section>
+    <script>
+        let augend = Number(document.getElementById('augend').innerHTML);
+        let addend = Number(document.getElementById('addend').innerHTML);
+
+        let userInput = document.querySelector('input');
+        let correct = document.createElement('span');
+        let addendInput = document.createElement('div');
+
+        document.querySelector('input').onkeypress = function(e) {
+            if (e.charCode === 0) {
+                let firstNum = userInput.value;
+                if (firstNum !== '6') {
+                    this.style.color = 'red';
+                    document.getElementById('augend').style.backgroundColor = 'orange';
+                } else {
+                    this.style.color = '';
+                    userInput.remove();
+                    document.querySelector('.arrow_augend').appendChild(correct).innerHTML = firstNum;
+                    document.querySelector('.number_line').appendChild(addendInput).classList.add('arrow_addend');
+                    document.getElementById('augend').style.backgroundColor = '';
+                }
+            } else return;
+        }
+        
+    </script>
+</body>
+</html>
