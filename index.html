@@ -11,13 +11,14 @@
             padding: 5px;
             border-radius: 5px;
         }
-        input {
+        .augendInput {
             display: block;
             width: 10px;
             margin: 0 auto;
             border-radius: 5px;
             border: 1px solid #ccc;
             padding: 4px;
+            font-size: 18px;
         }
        .task {
            font-family: sans-serif;
@@ -28,7 +29,7 @@
        }
             .solving {
                 font-size: 36px;
-                width: 200px;
+                width: 250px;
                 margin: 20px auto;
             }
         .arrow_augend {
@@ -57,8 +58,14 @@
             height: 50px;
             margin: 155px auto;
         }
-        .solving .solving-input {
+        .solving_input {
             display: inline-block;
+            position: absolute;
+            width: 60px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            padding: 4px;
+            font-size: 27px;
         }
     </style>
 </head>
@@ -75,10 +82,10 @@
         </div>
         <div class="number_line">
             <div class="arrow_augend">
-                <input class="augendInput" type="text" maxlength="1" style= "font-size: 18px;">
+                <input class="augendInput" type="text" maxlength="1">
             </div>
         </div>
     </section>
-    <script src="main.js" defer="true"></script>
+    <script src="main.js"></script>
 </body>
 </html>
