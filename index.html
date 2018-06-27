@@ -65,30 +65,6 @@
             <!-- <div class="arrow_addend"></div> -->
         </div>
     </section>
-    <script>
-        let augend = Number(document.getElementById('augend').innerHTML);
-        let addend = Number(document.getElementById('addend').innerHTML);
-
-        let userInput = document.querySelector('input');
-        let correct = document.createElement('span');
-        let addendInput = document.createElement('div');
-
-        document.querySelector('input').onkeypress = function(e) {
-            if (e.charCode === 0) {
-                let firstNum = userInput.value;
-                if (firstNum !== '6') {
-                    this.style.color = 'red';
-                    document.getElementById('augend').style.backgroundColor = 'orange';
-                } else {
-                    this.style.color = '';
-                    userInput.remove();
-                    document.querySelector('.arrow_augend').appendChild(correct).innerHTML = firstNum;
-                    document.querySelector('.number_line').appendChild(addendInput).classList.add('arrow_addend');
-                    document.getElementById('augend').style.backgroundColor = '';
-                }
-            } else return;
-        }
-        
-    </script>
+    <script src="main.js"></script>
 </body>
 </html>
