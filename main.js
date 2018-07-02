@@ -4,7 +4,7 @@ const getRandom = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
 };
 
-const drawCanvas = () => {
+const drawCanvas = () => { // отрисовка канваса с линейкой и первой стрелкой
     let ctx = document.getElementById('canvas').getContext('2d');
     let img = new Image();
     img.onload = function() {
@@ -16,11 +16,15 @@ const drawCanvas = () => {
         ctx.moveTo(35, 130);
         ctx.quadraticCurveTo(((augend * 40) + 30 + 35)/2, 10, (augend * 40) + 28, 130);
         ctx.stroke();
+        ctx.beginPath();
+        ctx.arc((augend * 40) + 28, 130, 4, 0,2 * Math.PI);
+        ctx.stroke();
+        ctx.fill();
     };
     img.src = 'assets/sprite.png';
 }
 
-const drawSecond = () => {
+const drawSecond = () => { // отрисовка второй стрелки
     let ctx = document.getElementById('canvas').getContext('2d');
     ctx.beginPath();
     ctx.strokeStyle = '#ff5fac';
@@ -29,6 +33,10 @@ const drawSecond = () => {
     ctx.moveTo((augend * 40) + 30, 130);
     ctx.quadraticCurveTo(((augend * 40) + 28 + (addend * 40) + 25 + (augend * 40))/2, 10, (addend * 40) + 25 + (augend * 40), 130);
     ctx.stroke();
+    ctx.beginPath();
+    ctx.arc((addend * 40) + 25 + (augend * 40), 130, 4, 0,2 * Math.PI);
+    ctx.stroke();
+    ctx.fill();
 };
 
 window.onload = function() {
@@ -113,6 +121,7 @@ document.querySelector('input').onkeypress = function(e) {
                                 } else {
                                     this.remove();
                                     solving.appendChild(solved).innerHTML = summaryNum;
+                                    document.querySelector('.checked').style.display = 'inline-block';
                                 }
                             } else return;
                         }
