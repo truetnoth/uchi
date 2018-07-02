@@ -10,8 +10,8 @@ const drawCanvas = () => {
     img.onload = function() {
         ctx.drawImage(img, 0, 200-83);
         ctx.beginPath();
-        ctx.strokeStyle = '#ffccff';
-        ctx.fillStyle = '#ffccff';
+        ctx.strokeStyle = '#ff5fac';
+        ctx.fillStyle = '#ff5fac';
         ctx.lineWidth = 3;
         ctx.moveTo(35, 130);
         ctx.quadraticCurveTo(((augend * 40) + 30 + 35)/2, 10, (augend * 40) + 28, 130);
@@ -23,8 +23,8 @@ const drawCanvas = () => {
 const drawSecond = () => {
     let ctx = document.getElementById('canvas').getContext('2d');
     ctx.beginPath();
-    ctx.strokeStyle = '#ffccff';
-    ctx.fillStyle = '#ffccff';
+    ctx.strokeStyle = '#ff5fac';
+    ctx.fillStyle = '#ff5fac';
     ctx.lineWidth = 3;
     ctx.moveTo((augend * 40) + 30, 130);
     ctx.quadraticCurveTo(((augend * 40) + 28 + (addend * 40) + 25 + (augend * 40))/2, 10, (addend * 40) + 25 + (augend * 40), 130);
