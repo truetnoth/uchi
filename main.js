@@ -1,12 +1,66 @@
 'use strict';
 
-window.onload = function() {
-    userInput.value = ''; // чистим ввод при перезагрузке страницы
-    console.log('👱🏼 Трусевич Валерий')
+const getRandom = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
 };
 
-let augend = document.getElementById('augend').innerHTML; // сбор значений из исходного задания для 1 слагаемого
-let addend = document.getElementById('addend').innerHTML; // сбор значений из исходного задания для 2 слагаемого
+const drawCanvas = () => {
+    let ctx = document.getElementById('canvas').getContext('2d');
+    let img = new Image();
+    img.onload = function() {
+        ctx.drawImage(img, 0, 200-83);
+        ctx.beginPath();
+        ctx.strokeStyle = '#ffccff';
+        ctx.fillStyle = '#ffccff';
+        ctx.lineWidth = 3;
+        ctx.moveTo(35, 130);
+        ctx.quadraticCurveTo(((augend * 40) + 30 + 35)/2, 10, (augend * 40) + 28, 130);
+        ctx.stroke();
+    };
+    img.src = 'assets/sprite.png';
+}
+
+const drawSecond = () => {
+    let ctx = document.getElementById('canvas').getContext('2d');
+    ctx.beginPath();
+    ctx.strokeStyle = '#ffccff';
+    ctx.fillStyle = '#ffccff';
+    ctx.lineWidth = 3;
+    ctx.moveTo((augend * 40) + 30, 130);
+    ctx.quadraticCurveTo(((augend * 40) + 28 + (addend * 40) + 25 + (augend * 40))/2, 10, (addend * 40) + 25 + (augend * 40), 130);
+    ctx.stroke();
+};
+
+window.onload = function() {
+    userInput.style.left = augendMedian - 10 + 'px';
+    userInput.value = ''; // чистим ввод при перезагрузке страницы
+    console.log('👱🏼 Трусевич Валерий');
+    drawCanvas();
+};
+
+document.getElementById('augend').innerHTML = getRandom(6, 9);
+
+switch (Number(document.getElementById('augend').innerHTML)) {
+    case 6:
+        document.getElementById('addend').innerHTML = getRandom(5,8);
+        break;
+    case 7:
+        document.getElementById('addend').innerHTML = getRandom(4,7);
+        break;
+    case 8:
+        document.getElementById('addend').innerHTML = getRandom(3,6);
+        break;
+    case 9:
+        document.getElementById('addend').innerHTML = getRandom(2,5);
+        break;
+};
+
+let augend = document.getElementById('augend').innerHTML;
+let addend = document.getElementById('addend').innerHTML;
+
+let augendMedian = ((augend * 40) + 30 + 35)/2;
+let addendMedian = ((augend * 40) + 30 + (addend * 40) + 25 + (augend * 40))/2;
+
 let summary = document.getElementById('summary');
 let summaryNum = String(Number(augend) + Number(addend)); // получаем ответ задания из входных данных
 
@@ -14,8 +68,6 @@ let userInput = document.querySelector('input');
 let correctAugend = document.createElement('span');
 let correctAddend = document.createElement('span');
 let solved = document.createElement('span');
-let addendInput = document.createElement('div');
-let augendInput = document.createElement('input');
 let solvingInput = document.createElement('input');
 let solving = document.querySelector('.solving');
 
@@ -28,22 +80,26 @@ document.querySelector('input').onkeypress = function(e) {
         } else {
             this.style.color = ''; 
             userInput.remove(); // убираем форму для замены на правильный ответ
-            document.querySelector('.arrow_augend').appendChild(correctAugend).innerHTML = firstNum;
-            document.querySelector('.number_line').appendChild(addendInput).classList.add('arrow_addend'); // добавляем стрелку
-            document.querySelector('.arrow_addend').appendChild(augendInput).classList.add('augendInput'); // добавляем поле ввода для стрелки 
-            document.querySelector('.augendInput').setAttribute('maxlength', '1'); // выставляем ограничение на количество символов в поле ввода
+            document.querySelector('.number_line').insertAdjacentHTML('beforeend', '<span class = "augendSpan"></span>');
+            document.querySelector('.augendSpan').innerHTML = firstNum;
+            document.querySelector('.augendSpan').style.left = augendMedian - 10 + 'px';
+            document.querySelector('.number_line').insertAdjacentHTML('beforeend', '<input class = "addendInput" maxlength = "1"></input>');
+            document.querySelector('.addendInput').style.left = addendMedian - 13 + 'px';
+            drawSecond();
             document.getElementById('augend').style.backgroundColor = '';
 
-            document.querySelector('.augendInput').onkeypress = function(e) {
+            document.querySelector('.addendInput').onkeypress = function(e) {
                 if (e.charCode === 0 || e.charCode === 13) {
                     let secondNum = this.value;
-                    if (secondNum !== addend) {
+                    if (secondNum !== addend) { 
                         this.style.color = 'red';
                         document.getElementById('addend').style.backgroundColor = 'orange';
                     } else {
                         this.style.color = '';
-                        augendInput.remove();
-                        document.querySelector('.arrow_addend').appendChild(correctAddend).innerHTML = secondNum;
+                        document.querySelector('.addendInput').remove();
+                        document.querySelector('.number_line').insertAdjacentHTML('beforeend', '<span class = "addendSpan"></span>');
+                        document.querySelector('.addendSpan').innerHTML = secondNum;
+                        document.querySelector('.addendSpan').style.left = addendMedian - 13 + 'px';
                         summary.remove();
                         solving.appendChild(solvingInput).classList.add('solving_input');
                         document.querySelector('.solving_input').setAttribute('maxlength', '2');
@@ -56,7 +112,7 @@ document.querySelector('input').onkeypress = function(e) {
                                     this.style.color = 'red';
                                 } else {
                                     this.remove();
-                                    document.querySelector('.solving').appendChild(solved).innerHTML = summaryNum;
+                                    solving.appendChild(solved).innerHTML = summaryNum;
                                 }
                             } else return;
                         }
@@ -64,7 +120,6 @@ document.querySelector('input').onkeypress = function(e) {
                     
                 } else return;
             }
-
         }
     } else return;
 };
